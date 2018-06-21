@@ -1,0 +1,20 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1529529825375
+Build-Jdk: 1.8.0_161
+Built-By: ctoro
+Bundle-Blueprint: OSGI-INF/blueprint/blueprint.xml
+Bundle-Description: Empty Camel Blueprint Example
+Bundle-License: http://www.apache.org/licenses/LICENSE-2.0.html
+Bundle-ManifestVersion: 2
+Bundle-Name: Empty Camel Blueprint Example [Lab-Rest-WSDL]
+Bundle-SymbolicName: Lab-Rest-WSDL
+Bundle-Version: 1.0.0.SNAPSHOT
+Created-By: Apache Maven Bundle Plugin
+Export-Package: cl.syachile.rest;version="1.0.0";uses:="javax.ws.rs,java
+ x.ws.rs.core,org.apache.camel,org.apache.cxf.jaxrs.ext.multipart"
+Import-Package: javax.ws.rs;version="[2.0,3)",javax.ws.rs.core;version="
+ [2.0,3)",org.apache.activemq.camel.component;version="[5.11,6)",org.apa
+ che.camel;version="[2.17,3)",org.apache.cxf.jaxrs.ext.multipart;version
+ ="[3.1,4)",org.osgi.service.blueprint;version="[1.0.0,2.0.0)"
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
+Tool: Bnd-3.2.0.201605172007

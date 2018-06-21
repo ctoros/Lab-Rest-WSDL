@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+    xmlns:cxf="http://camel.apache.org/schema/blueprint/cxf"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 https://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd                              http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd">
+    <!-- <bean class="cl.syachile.rest.HeadersCXF" id="headersBean" scope="singleton"/> -->
+    <bean class="org.apache.activemq.camel.component.ActiveMQComponent" id="AMQ">
+        <property name="brokerURL" value="tcp://localhost:61616"/>
+        <property name="userName" value="admin"/>
+        <property name="password" value="admin"/>
+        <property name="usePooledConnection" value="true"/>
+    </bean>
+<!--     <cxf:cxfEndpoint -->
+<!--         address="http://busint-qa-vip.coopeuch1.cl:9000/cxf/ServicioProductos" id="toProductorEnpoint"/> -->
+    <camelContext id="_context1" xmlns="http://camel.apache.org/schema/blueprint">
+        <route id="_route1">
+            <!-- <from id="_to2" uri="file:C:\Users\ctoro\Desktop\amqtest"/> -->
+            <from id="_from1" uri="cxfrs:http://localhost:8080?resourceClasses=cl.syachile.rest.GetMessage"/>
+<!--        <from id="_from1" uri="cxfrs:http://localhost:9096?resourceClasses=cl.syachile.rest.GetMessage"/> -->
+            <log id="_log1" message="despues de cola LOG1 BODY ${body}  OPERATION NAME  ${header.operationName}"/>
+            <convertBodyTo id="_convertBodyTo1" type="String"/>
+            <log id="_log5" message="LOG5 BODY: ${body}  OPERATION NAME  ${header.operationName}"/>
+            <removeHeaders id="_removeHeaders1" pattern="JMS*"/>
+            <to id="_to1" uri="AMQ:colaRest"/>
+            <log id="_log2" message="fin rest ${body}"/>
+        </route>
+    </camelContext>
+</blueprint>
